@@ -5,7 +5,7 @@
 
 package tests
 
-import kotlin.native.concurrent.ThreadLocal
+//import kotlin.native.concurrent.ThreadLocal
 
 
 internal fun Char.isUpperCase(): Boolean = this in 'A'..'Z'
@@ -33,7 +33,7 @@ public inline fun testOn(platform: TestPlatform, action: () -> Unit) {
     if (platform == currentPlatform) action()
 }
 
-@ThreadLocal
+//@ThreadLocal
 private var stringValues = mutableListOf<String>()
 
 internal fun distinctStringValues(size: Int): List<String> {

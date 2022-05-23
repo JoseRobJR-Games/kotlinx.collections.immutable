@@ -6,11 +6,11 @@
 package tests.stress
 
 import kotlinx.collections.immutable.internal.assert
-import kotlin.js.JsName
+//import kotlin.js.JsName
 
 class ObjectWrapper<K: Comparable<K>>(
         val obj: K,
-        @JsName("_hashCode") val hashCode: Int
+        /*@JsName("_hashCode")*/ val hashCode: Int
 ) : Comparable<ObjectWrapper<K>> {
     override fun hashCode(): Int {
         return hashCode

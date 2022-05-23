@@ -3,6 +3,7 @@ import kotlinx.team.infra.mavenPublicationsPom
 plugins {
     id("kotlin-multiplatform")
     `maven-publish`
+    kotlin("plugin.serialization") version "1.6.21"
 }
 
 base {
@@ -14,6 +15,7 @@ mavenPublicationsPom {
 }
 
 kotlin {
+    /*
     infra {
         target("linuxX64")
         target("mingwX64")
@@ -35,6 +37,7 @@ kotlin {
             target("tvosSimulatorArm64")
         }
     }
+     */
 
     jvm {
         compilations.all {
@@ -44,6 +47,7 @@ kotlin {
         }
     }
 
+    /*
     js(BOTH) {
         nodejs {
             testTask {
@@ -60,6 +64,7 @@ kotlin {
             }
         }
     }
+     */
 
     sourceSets.all {
         kotlin.setSrcDirs(listOf("$name/src"))
@@ -74,6 +79,7 @@ kotlin {
         commonMain {
             dependencies {
                 api("org.jetbrains.kotlin:kotlin-stdlib-common")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.3")
             }
         }
 
@@ -96,7 +102,7 @@ kotlin {
                 implementation("com.google.guava:guava-testlib:18.0")
             }
         }
-
+        /*
         val jsMain by getting {
             dependencies {
                 api("org.jetbrains.kotlin:kotlin-stdlib-js")
@@ -115,11 +121,14 @@ kotlin {
         val nativeTest by getting {
             dependsOn(commonTest.get())
         }
+         */
     }
 }
 
 tasks {
+    /*
     named("jvmTest", Test::class) {
         maxHeapSize = "1024m"
     }
+     */
 }

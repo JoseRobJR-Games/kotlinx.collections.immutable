@@ -5,6 +5,10 @@
 
 package kotlinx.collections.immutable
 
+import kotlinx.collections.immutable.serializers.ImmutableMapSerializer
+import kotlinx.collections.immutable.serializers.PersistentMapSerializer
+import kotlinx.serialization.Serializable
+
 /**
  * A generic immutable collection that holds pairs of objects (keys and values) and supports efficiently retrieving
  * the value corresponding to each key. Map keys are unique; the map holds only one value for each key.
@@ -19,6 +23,7 @@ package kotlinx.collections.immutable
  *          can accept key as a parameter (of [containsKey] for example) and return it in [keys] set.
  * @param V the type of map values. The map is covariant on its value type.
  */
+@Serializable(with = ImmutableMapSerializer::class)
 public interface ImmutableMap<K, out V>: Map<K, V> {
 
     override val keys: ImmutableSet<K>
@@ -38,6 +43,7 @@ public interface ImmutableMap<K, out V>: Map<K, V> {
  * @param K the type of map keys. The map is invariant on its key type.
  * @param V the type of map values. The persistent map is covariant on its value type.
  */
+@Serializable(with = PersistentMapSerializer::class)
 public interface PersistentMap<K, out V> : ImmutableMap<K, V> {
     /**
      * Returns the result of associating the specified [value] with the specified [key] in this map.

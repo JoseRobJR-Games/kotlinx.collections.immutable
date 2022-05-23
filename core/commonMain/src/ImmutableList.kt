@@ -5,7 +5,11 @@
 
 package kotlinx.collections.immutable
 
+import kotlinx.collections.immutable.ImmutableList.SubList
 import kotlinx.collections.immutable.internal.ListImplementation
+import kotlinx.collections.immutable.serializers.ImmutableListSerializer
+import kotlinx.collections.immutable.serializers.PersistentListSerializer
+import kotlinx.serialization.Serializable
 
 /**
  * A generic immutable ordered collection of elements. Methods in this interface support only read-only access to the immutable list.
@@ -17,6 +21,7 @@ import kotlinx.collections.immutable.internal.ListImplementation
  *
  * @param E the type of elements contained in the list. The immutable list is covariant on its element type.
  */
+@Serializable(with = ImmutableListSerializer::class)
 public interface ImmutableList<out E> : List<E>, ImmutableCollection<E> {
 
     /**
@@ -59,6 +64,7 @@ public interface ImmutableList<out E> : List<E>, ImmutableCollection<E> {
  *
  * @param E the type of elements contained in the list. The persistent list is covariant on its element type.
  */
+@Serializable(with = PersistentListSerializer::class)
 public interface PersistentList<out E> : ImmutableList<E>, PersistentCollection<E> {
     /**
      * Returns a new persistent list with the specified [element] appended.

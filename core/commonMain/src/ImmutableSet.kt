@@ -5,6 +5,10 @@
 
 package kotlinx.collections.immutable
 
+import kotlinx.collections.immutable.serializers.ImmutableSetSerializer
+import kotlinx.collections.immutable.serializers.PersistentSetSerializer
+import kotlinx.serialization.Serializable
+
 /**
  * A generic immutable unordered collection of elements that does not support duplicate elements.
  * Methods in this interface support only read-only access to the immutable set.
@@ -16,6 +20,7 @@ package kotlinx.collections.immutable
  *
  * @param E the type of elements contained in the set. The set is covariant on its element type.
  */
+@Serializable(with = ImmutableSetSerializer::class)
 public interface ImmutableSet<out E>: Set<E>, ImmutableCollection<E>
 
 /**
@@ -26,6 +31,7 @@ public interface ImmutableSet<out E>: Set<E>, ImmutableCollection<E>
  *
  * @param E the type of elements contained in the set. The persistent set is covariant on its element type.
  */
+@Serializable(with = PersistentSetSerializer::class)
 public interface PersistentSet<out E> : ImmutableSet<E>, PersistentCollection<E> {
     /**
      * Returns the result of adding the specified [element] to this set.
